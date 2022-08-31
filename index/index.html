@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主页面</title>
+    <script src="../common/jq/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      $.ready(function() {
+        const btn = $('#btn');
+        const filePathElement = $('#filePath');
+        console.log();
+        let fileObj;
+        btn.click(async () => {
+          fileObj = await window.electronAPI.chooseDir();
+          filePathElement.text(JSON.stringify(filePaths));
+        })
+      });
+    </script>
+    <style>
+      .no-color-btn {
+        width: 120px;
+        height: 40px;
+        line-height: 40px;
+        vertical-align: middle;
+        font-size: 16px;
+        color: #666;
+        cursor: pointer;
+        position: all 0.3s;
+        border: 1px solid #eee;
+        text-align: justify;
+        user-select: none;
+        border-radius: 4px;
+      }
+      .no-color-btn:hover {
+        color: #409EFF;
+        background-color: #ECF5FF;
+      }
+      .no-color-btn:after {
+        display: inline-block;
+        width: 100%;
+        content: '';
+      }
+      .no-color-btn:active {
+        border-color: #3A8EE6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="no-color-btn">
+      点击我添加目录
+    </div>
+  </body>
+</html>
