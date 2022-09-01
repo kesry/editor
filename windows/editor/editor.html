@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>editor</title>
+    <link rel="stylesheet" href="../editormd/css/editormd.min.css" />
+    <script src="../editormd/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../editormd/editormd.min.js"></script>
+    <script type="text/javascript" src="../editormd/lib/flowchart.min.js"></script>
+    <script type="text/javascript" src="../editormd/lib/jquery.flowchart.min.js"></script>
+    <script type="text/javascript" src="../study/js/common.js"></script>
+    <style>
+      * { margin: 0; padding: 0;}
+      html, body { width: 100%; height: 100%; font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace !important; font-size: 12px !important;}
+      /* body{ overflow: hidden;} */
+      .scroll::-webkit-scrollbar,.scroll::-webkit-scrollbar { /*滚动条整体样式*/
+          width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+          height: 5px;
+          border-radius: 5px;
+          background-color: #eee;
+      }
+      .scroll::-webkit-scrollbar-thumb,.scroll::-webkit-scrollbar-thumb { /* 滑块 */
+        width: 5px;
+        heigh
+        t: 5px;
+        border-radius: 4px;
+        background-color: #ccc;
+      }
+      .scroll{
+          overflow: auto;
+          scrollbar-color: #ccc #eee;
+          scrollbar-width: thin;
+      }
+      .container {
+        display: flex;
+        padding: 0 5px;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100%;
+
+      }
+      .container .left {
+        flex: 1;
+        height: 100%;
+        overflow: scroll;
+      }
+      .container .right {
+        flex: 3;
+        height: 100%;
+
+      }
+      #eidtor {
+        border-top: none;
+        border-bottom: none;
+      }
+      #toc {
+        border-left: 1px solid #ddd;
+      }
+      .editormd .cm-tab {
+        background-image: none;
+      }
+      .menu ul li{
+        padding: 0 20px;
+        list-style: none;
+      }
+      .menu ul li a {
+        padding: 5px 20px;
+        line-height: 20px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-align: left;
+        font-size: 14px;
+        word-wrap:break-word;
+        display: inline-block;
+      }
+      a {
+      	color: #606266;
+      	text-decoration: none;
+        cursor: pointer;
+      }
+      a:hover {
+      	text-decoration: underline;
+      }
+      .prettyprinted {
+        background-color: #f6f8fa !important;
+        overflow: scroll;
+      }
+      .linenums li {
+        background: none !important;
+      }
+
+      blockquote {
+        font-style: normal !important;
+      }
+
+
+    </style>
+    <script type="text/javascript">
+      window.LinkQueue = common.LinkQueue;
+      window.checkInvalidFileName = function(fileName) {
+        if(typeof fileName != "string") return true;
+        if(fileName.length > 255) return true;
+        if(/[\\,\",\*,\/,<,>,\|,\:]/g.test(fileName)) { return true; }
+        if(/(CON)|(PRN)|(AUX)|(NUL)|(COM1)|(COM2)|(COM3)|(COM4)|(COM5)|(COM6)|(COM7)|(COM8)|(COM9)|(LPT1)|(LPT2)|(LPT3)|(LPT4)|(LPT5)|(LPT6)|(LPT7)|(LPT8)|(LPT9)/i.test(fileName)) return true; //
+        if(fileName.trim() === "") return true;
+        console.log(/^\S$/.test(fileName));
+        if(/^\S$/.test(fileName)) return true;
+        return false;
+      }
+      // let linkQueue = new LinkQueue(fun => typeof fun === 'function');
+      // linkQueue.inQueue(function() {
+      //   $.ajax({
+      //     url: "../study/前端.md",
+      //     dataType: "text",
+      //     method: 'get',
+      //     success(res) {
+      //       editormd.markdownToHTML("mdViewer", {
+      //         markdown        : res ,//+ "\r\n" + $("#append-test").text(),
+      //         //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+      //         // htmlDecode      : "style,script,iframe",  // you can filter tags decode
+      //         //toc             : false,
+      //         // tocm            : true,    // Using [TOCM]
+      //         tocContainer    : "#toc", // 自定义 ToC 容器层
+      //         //gfm             : false,
+      //         tocDropdown     : faslse,
+      //         // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+      //         emoji           : true,
+      //         taskList        : true,
+      //         tex             : true,  // 默认不解析
+      //         flowChart       : true,  // 默认不解析
+      //         sequenceDiagram : true,  // 默认不解析
+      //         disabledKeyMaps : [
+      //           "Ctrl-B", "F11", "F10"  // disable some default keyboard shortcuts handle
+      //         ],
+      //         onload : function() {
+      //           var keyMap = {
+      //               "Ctrl-S": function(cm) {
+      //                   // alert("Ctrl+S");
+      //               }
+      //           };
+      //           this.addKeyMap(keyMap);
+      //         }
+      //       });
+      //     }
+      //   })
+      // });
+      window.onload = function(){
+
+        // while(linkQueue.haseNext()) {
+        //   let fun = linkQueue.next();
+        //   fun();
+        // }
+
+        var editor = editormd("editor", {
+          path: "../editormd/lib/",
+          flowChart : true,
+          emoji: true,
+          codeFold : true,
+          delay : 300,
+          toc: true,
+          tocContainer : "#toc",
+          tocDropdown   : false,
+          // htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+          // htmlDecode      : "style,script,iframe",  // you can filter tags decode
+          disabledKeyMaps : [
+            "Ctrl-B", "F11", "F10"  // disable some default keyboard shortcuts handle
+          ],
+          onload : function() {
+            var keyMap = {
+                "Ctrl-S": function(cm) {
+                    let fileName = "";
+                    fileName = prompt("请输入保存文件名。");
+                    if(fileName === null) return; //点击了取消
+                    if(fileName.length > 255) {
+                      alert("文件名过长！");
+                    }
+                    //检测文件名是否合法
+                    if(checkInvalidFileName(fileName)) {
+                      alert("文件名: " + fileName + " 不符合Windows文件名命名规范！");
+                      return;
+                    } else {
+                      let blob = new Blob([editor.getMarkdown()], { type: "text/markdown" });
+                      let url = window.URL || window.webkitURL || window.moxURL;
+                      let downloadHref = url.createObjectURL(blob);
+                      let link = document.createElement("a");
+                      link.href =  downloadHref;
+                      link.download = fileName;
+                      link.click();
+                      url.revokeObjectURL(link);
+                    }
+                }
+            };
+            this.addKeyMap(keyMap);
+          }
+        });
+      }
+
+    </script>
+  </head>
+  <body class="scroll">
+    <div class="container scorll">
+      <div class="left scroll menu" id="toc"></div>
+      <div class="right" id="mdViewer">
+        <div id="editor">
+          <textarea style="display: none;" placeholder="2333333"></textarea>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
