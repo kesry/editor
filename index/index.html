@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>欢迎使用！</title>
+    <script src="../common/jq/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../common/base/base.css">
+    <link rel="stylesheet" href="./index.css"/>
+    <script src="../common/base/base.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      $().ready(function() {
+        addEventListener({
+          elem: dq(".menu-content"),
+          evtName: "mouseenter",
+          handler: function() {
+            dq("#menu-hidden").style.display = "block";
+          },
+          fn: false
+        });
+        addEventListener({
+          elem: dq("#menu-hidden"),
+          evtName: "mouseenter",
+          handler: function() {
+            dq("#menu-hidden").style.display = "block";
+          },
+          fn: false
+        });
+        addEventListener({
+          elem: dq(".menu-content"),
+          evtName: "mouseleave",
+          handler: function() {
+            dq("#menu-hidden").style.display = "none";
+          },
+          fn: false
+        });
+        addEventListener({
+          elem: dq("#menu-hidden"),
+          evtName: "mouseleave",
+          handler: function() {
+            dq("#menu-hidden").style.display = "none";
+          },
+          fn: false
+        });
+        addEventListener({
+          elem: dq("#menu-hidden"),
+          evtName: "click",
+          handler: function() {
+            addClass(dq(".content .left"), "left-hidden");
+            addClass(dq(".content .left .menu-content"), "menu-content-hidden");
+            dq(".content .left .menu-title").innerText = "";
+            dq("#menu-hidden").style.display = "none";
+            //console.log(dq(".content .left").style.visibility, dq(".content .left").includeInLayout);
+            // dq(".content .left").style.width = 0;
+            // dq(".content .left").includeInLayout = false;
+          },
+          fn: false
+        });
+        //, , index, fn
+        reomveRegistedEvent(dq("#menu-hidden"), "click", 0, false);
+
+        addEventListener({
+          elem: dq(".right-body"),
+          evtName: "mousemove",
+          handler: function(e) {
+            if(e.clientX <= 5) {
+              dq("#menu-hidden").style.display = "block";
+            }
+          },
+          fn: false
+        })
+        // alert(1)
+        // test(3);
+      });
+    </script>
+  </head>
+  <body>
+    <div class="content">
+      <div class="left">
+        <div class="menu-title">工作空间</div>
+        <div style="height: 100%; position: relative;">
+          <div class="menu-hidden" id="menu-hidden">
+
+          </div>
+          <div class="menu-content scroll">
+            <div class="menu" data-hidden="menu-hidden">
+              <div class="text">
+                <a href="javascript:void(0)">work</a>
+              </div>
+              <div class="menu-item">2级菜单</div>
+              <div class="menu-item">2级菜单</div>
+              <div class="menu-item">2级菜单</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right scroll">
+        <div class="right-head">
+
+        </div>
+        <div class="right-body">
+
+        </div>
+      </div>
+    </div>
+    <!-- <div class="no-color-btn">
+      点击我添加目录
+    </div> -->
+  </body>
+</html>

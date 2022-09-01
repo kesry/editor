@@ -1,0 +1,26 @@
+.no-color-btn {
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  position: all 0.3s;
+  border: 1px solid #eee;
+  text-align: justify;
+  user-select: none;
+  border-radius: 4px;
+}
+.no-color-btn:hover {
+  color: #409EFF;
+  background-color: #ECF5FF;
+}
+.no-color-btn:after {
+  display: inline-block;
+  width: 100%;
+  content: '';
+}
+.no-color-btn:active {
+  border-color: #3A8EE6;
+}

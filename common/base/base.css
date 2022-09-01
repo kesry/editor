@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: #333;
+  font-weight: 400;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+a {
+  text-indent: 0.2em;
+  text-decoration: none;
+  display: block;
+}
+a:visited {
+  color: #333;
+}
+.content {
+  height: 100%;
+  display: flex;
+}
+/* .content .left { width: 22%; display: inline-block; border-right: 1px solid #eee;} */
+.content .left { height: 100%; flex: 1; display: flex; flex-direction: column; border-right: 1px solid #eee; transition: all 0.3s;}
+.content .left .menu-content { padding: 0 20px; overflow: auto; height: 100%; }
+.content .right { height: 100%; flex: 4; display: flex; flex-direction: column; }
+.content .right .content-box { padding: 0 20px; }
+.content .right .right-head { height: 35px; line-height: 35px; vertical-align: middle;  }
+.content .right .right-body { height: 100%; }
+.content .left-hidden { width: 0; flex: 0; padding: 0; }
+.content .left .menu-content-hidden { padding: 0; }
+.menu {
+  padding-left: 20px;
+  text-indent: 0.2em;
+}
+.menu-item {
+  padding-left: 20px;
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+  text-indent: 0.2em;
+}
+.text {
+  user-select: none;
+  cursor: pointer;
+  text-indent: 0.2em;
+}
+.menu .text {
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+}
+.menu-title {
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+  text-align: center;
+  user-select: none;
+  cursor: default;
+}
+.text:hover {
+	background-color: #F5F7FA;
+  text-decoration: underline;
+}
+.menu-item:hover {
+	background-color: #F5F7FA;
+  text-decoration: underline;
+}
+
+.scroll::-webkit-scrollbar,.scroll::-webkit-scrollbar { /*滚动条整体样式*/
+    width: 5px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 5px;
+    border-radius: 5px;
+    background-color: #eee;
+}
+.scroll::-webkit-scrollbar-thumb,.scroll::-webkit-scrollbar-thumb { /* 滑块 */
+  width: 5px;
+  height: 5px;
+  border-radius: 4px;
+  background-color: #ccc;
+}
+.scroll{
+    overflow: auto;
+    scrollbar-color: #ccc #eee;
+    scrollbar-width: thin;
+}
+
+.menu-hidden {
+  position: absolute;
+  float: right;
+  width: 20px;
+  height: 40px;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-left: #fff;
+  border-top: 1px solid #ccc;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transform: rotate(-45deg);
+  top: 50%;
+  right: 0;
+  transform: translateX(21px) translateY(-20px);
+  display: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
