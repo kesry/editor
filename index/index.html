@@ -35,32 +35,40 @@
           function() {
             dq("#menu-hidden").style.display = "none";
           },
-          false);
+        false);
 
-        addEventListener(
-          dq("#menu-hidden"),
+        addEventListener(dq("#menu-hidden"),
           "click",
           function() {
-            addClass(dq(".content .left"), "left-hidden");
-            addClass(dq(".content .left .menu-content"), "menu-content-hidden");
-            dq(".content .left .menu-title").innerText = "";
-            dq("#menu-hidden").style.display = "none";
-          },
-          false
-        );
-
-        // reomveRegistedEvent(dq("#menu-hidden"), "click", 0, false);
-
-        addEventListener(
-          dq(".right-body"),
-          "mousemove",
-          function(e) {
-            if(e.clientX <= 5) {
-              dq("#menu-hidden").style.display = "block";
+            // console.log(this.getAttribute("data-hidden-status"));
+            if(this.getAttribute("data-hidden-status") === "show"){
+              this.style.display = "none";
+              dq(".content .left .menu-title").innerText = "";
+              addClass(dq(".content .left"), "left-hidden");
+              addClass(dq(".content .left .menu-content"), "menu-content-hidden");
+              this.setAttribute("data-hidden-status", "hidden")
+              this.style.backgroundImage = 'url("../common/icons/right.png")';
+            } else if(this.getAttribute("data-hidden-status") === "hidden"){
+              // dq("#menu-hidden").style.display = "block";
+              this.style.backgroundImage = 'url("../common/icons/left.png")';
+              dq(".content .left .menu-title").innerText = "工作空间";
+              removeClass(dq(".content .left"), "left-hidden");
+              removeClass(dq(".content .left .menu-content"), "menu-content-hidden");
+              this.setAttribute("data-hidden-status", "show");
             }
           },
-          false
-        )
+        false);
+
+        addEventListener(dq(".right-body"),
+          "mousemove",
+          function(e) {
+            if(e.clientX <= 20) {
+              dq("#menu-hidden").style.display = "block";
+            } else if(e.clientY > 100){
+              dq("#menu-hidden").style.display = "none";
+            }
+          },
+        false)
         // alert(1)
         // test(3);
       });
@@ -70,33 +78,32 @@
     <div class="content">
       <div class="left">
         <div class="menu-title">工作空间</div>
-        <div style="height: 100%; position: relative;">
-          <div class="menu-hidden" id="menu-hidden">
+        <div style="height: 100%; position: relative; display: none;">
+          <div class="menu-hidden" id="menu-hidden" data-hidden-status="show">
 
           </div>
           <div class="menu-content scroll">
-            <div class="menu" data-hidden="menu-hidden">
+            <div class="menu">
               <div class="text">
-                <a href="javascript:void(0)">work</a>
+                <img width="24px" height="24px" style="display: inline-block; line-heigh: 35px; vertical-align: middle;" src="../common/icons/bxs-file-archive.svg" />
+                <a href="javascript:void(0)" style="flex: 1;">work</a>
               </div>
-              <div class="menu-item">2级菜单</div>
-              <div class="menu-item">2级菜单</div>
-              <div class="menu-item">2级菜单</div>
+              <div class="menu-item">
+                <img width="24px" height="24px" style="display: inline-block; line-heigh: 35px; vertical-align: middle;" src="../common/icons/bxs-file.svg" />
+                <a href="javascript:void(0)" style="flex: 1;">2级菜单</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="right scroll">
-        <div class="right-head">
+      <div class="right">
+        <div class="right-head scroll">
 
         </div>
-        <div class="right-body">
+        <div class="right-body scroll">
 
         </div>
       </div>
     </div>
-    <!-- <div class="no-color-btn">
-      点击我添加目录
-    </div> -->
   </body>
 </html>

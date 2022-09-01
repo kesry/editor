@@ -13,10 +13,13 @@ html, body {
 a {
   text-indent: 0.2em;
   text-decoration: none;
-  display: block;
+  display: inline-block;
 }
 a:visited {
   color: #333;
+}
+a:hover {
+  text-decoration: underline;
 }
 .content {
   height: 100%;
@@ -27,7 +30,7 @@ a:visited {
 .content .left .menu-content { padding: 0 20px; overflow: auto; height: 100%; }
 .content .right { height: 100%; flex: 4; display: flex; flex-direction: column; }
 .content .right .content-box { padding: 0 20px; }
-.content .right .right-head { height: 35px; line-height: 35px; vertical-align: middle;  }
+.content .right .right-head { height: 35px; line-height: 35px; vertical-align: middle; scroll: auto;}
 .content .right .right-body { height: 100%; }
 .content .left-hidden { width: 0; flex: 0; padding: 0; }
 .content .left .menu-content-hidden { padding: 0; }
@@ -43,11 +46,15 @@ a:visited {
   user-select: none;
   cursor: pointer;
   text-indent: 0.2em;
+  display: flex;
+  align-items: center;
 }
 .text {
   user-select: none;
   cursor: pointer;
   text-indent: 0.2em;
+  display: flex;
+  align-items: center;
 }
 .menu .text {
   height: 35px;
@@ -64,11 +71,9 @@ a:visited {
 }
 .text:hover {
 	background-color: #F5F7FA;
-  text-decoration: underline;
 }
 .menu-item:hover {
 	background-color: #F5F7FA;
-  text-decoration: underline;
 }
 
 .scroll::-webkit-scrollbar,.scroll::-webkit-scrollbar { /*滚动条整体样式*/
@@ -107,4 +112,12 @@ a:visited {
   display: none;
   transition: all 0.3s;
   cursor: pointer;
+  background-image: url("../icons/left.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+}
+.menu-icon {
+  width: 35px;
+  height: 35px;
 }

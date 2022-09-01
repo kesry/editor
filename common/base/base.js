@@ -7,15 +7,15 @@ if(typeof struts == "undefined") { //导入的是 源码
   window.LinkQueue = struts.LinkQueue;
   window.LinkStack = struts.LinkStack;
 }
-window.evts = {}; // { "元素": { "事件名1": [handler1, handler2], "事件名2": [handler3, handler4] } }
-window.reomveRegistedEvent = function(elem, eventName, index, fn) {
+window.events = {}; // { "元素": { "事件名1": [handler1, handler2], "事件名2": [handler3, handler4] } }
 
+window.reomveRegistedEvent = function(elem, eventName, index, fn) {
   if(typeof index != "number") {
     console.error("必须传入索引！");
     return;
   }
   fn = fn || false;
-  let evtObj = window.evts[elem];
+  let evtObj = window.events[elem];
 
   if(!evtObj) {
     console.error("元素 " + elem +" 未注册事件！");
@@ -27,11 +27,11 @@ window.reomveRegistedEvent = function(elem, eventName, index, fn) {
     console.error("元素 " + elem +" 未注册 " + eventName +" 事件！");
     return;
   }
-  console.log(handler);
 
   elem.removeEventListener(eventName, handler, fn);
-  // TODO: 删除已移除的事件响应
+  evtObj[eventName] = evtObj[eventName].filter(fun => fun != handler);
 }
+
 window.addClass = function(jsDom, className) {
   let oriClassName = jsDom.getAttribute("class");
   if(oriClassName) {
@@ -43,9 +43,17 @@ window.addClass = function(jsDom, className) {
   }
 }
 window.removeClass = function(jsDom, className) {
-
+  let jsDomClassNames = jsDom.className;
+  if(!jsDomClassNames) {
+    console.error("传入的DOM对象未设置class属性！");
+    return;
+  }
+  console.log(jsDomClassNames);
+  let classArr = jsDomClassNames.split(" ");
+  classArr = classArr.filter(e => e != className); //过滤掉不需要的className
+  console.log(classArr);
+  jsDom.setAttribute("class", classArr.join(" "));
 }
-window.events = {}; // "元素: { "事件名": [] }"
 console.warn("==★此处应该判断所需的前置插件是否已经安装★==");
 
 const addEventListener = function(jsDom, eventName, handler, fn) { //使用该方法为 元素添加监听 后续可以获取到元素
@@ -117,6 +125,7 @@ const createElement = function(propObj) {
 
   return element;
 }
+
 document.ready = function(callback) {
   if(document.addEventListener) {
     document.addEventListener("DOMContentLoaded", () => {
