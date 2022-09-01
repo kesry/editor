@@ -30,8 +30,36 @@ a:hover {
 .content .left .menu-content { padding: 0 20px; overflow: auto; height: 100%; }
 .content .right { height: 100%; flex: 4; display: flex; flex-direction: column; }
 .content .right .content-box { padding: 0 20px; }
-.content .right .right-head { height: 35px; line-height: 35px; vertical-align: middle; scroll: auto;}
-.content .right .right-body { height: 100%; }
+.content .right .right-head {
+  height: 35px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+}
+
+.content .right .right-head .tab-card-box {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.content .right .right-head .tab-card-box .tab-card  {
+  padding: 0 20px;
+  text-align: center;
+  border-right: 1px solid #eee;
+  cursor: default;
+  min-width: 180px;
+  height: 35px;
+  line-height: 35px;
+  position: relative;
+  vertical-align: middle;
+}
+.content .right .right-head .tab-card-box .tab-card:hover {
+  	background-color: #F5F7FA;
+}
+.content .right .right-body { flex: 1; }
 .content .left-hidden { width: 0; flex: 0; padding: 0; }
 .content .left .menu-content-hidden { padding: 0; }
 .menu {
@@ -89,9 +117,9 @@ a:hover {
   background-color: #ccc;
 }
 .scroll{
-    overflow: auto;
-    scrollbar-color: #ccc #eee;
-    scrollbar-width: thin;
+  overflow: auto;
+  scrollbar-color: #ccc #eee;
+  scrollbar-width: thin;
 }
 
 .menu-hidden {
@@ -120,4 +148,23 @@ a:hover {
 .menu-icon {
   width: 35px;
   height: 35px;
+}
+.close {
+  width: 16px;
+  height: 16px;
+  display: block;
+  border-radius: 50%;
+  /* float: right; */
+  right: 10px;
+  position: absolute;
+  line-height: 14px;
+  top: 30%;
+  /* background-color: red; */
+  font-size: 12px;
+  /* background-image: url(../icons/close.png); */
+  background-position: center;
+  background-repeat: no-no-repeat;
+}
+.close:hover {
+  background-color: #333;
 }
