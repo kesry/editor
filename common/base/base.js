@@ -3,7 +3,7 @@ window.dqa = sel => document.querySelectorAll(sel);
 if(typeof struts == "undefined") { //导入的是 源码
   window.LinkQueue = LinkQueue;
   window.LinkStack = LinkStack;
-} else { // 导入的是压缩版  
+} else { // 导入的是压缩版
   window.LinkQueue = struts.LinkQueue;
   window.LinkStack = struts.LinkStack;
 }

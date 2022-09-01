@@ -17,7 +17,7 @@ async function handleChooseDir() {
     return result;
   }
 }
-//递归获取 文件列表
+
 function getDirListSync(dirPath, obj) {
   let files = fs.readdirSync(dirPath);
   for(let file of files) {
