@@ -8,68 +8,59 @@
     <script src="../common/jq/jquery.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="../common/base/base.css">
     <link rel="stylesheet" href="./index.css"/>
+    <script src="../common/base/struts.js" charset="utf-8"></script>
     <script src="../common/base/base.js" charset="utf-8"></script>
     <script type="text/javascript">
       $().ready(function() {
-        addEventListener({
-          elem: dq(".menu-content"),
-          evtName: "mouseenter",
-          handler: function() {
+
+        addEventListener(dq(".menu-content"), "mouseenter",
+          function() {
             dq("#menu-hidden").style.display = "block";
           },
-          fn: false
-        });
-        addEventListener({
-          elem: dq("#menu-hidden"),
-          evtName: "mouseenter",
-          handler: function() {
-            dq("#menu-hidden").style.display = "block";
+        false);
+
+        addEventListener(dq("#menu-hidden"), "mouseenter",
+          function() {
+              dq("#menu-hidden").style.display = "block";
           },
-          fn: false
-        });
-        addEventListener({
-          elem: dq(".menu-content"),
-          evtName: "mouseleave",
-          handler: function() {
+        false);
+
+        addEventListener(dq(".menu-content"), "mouseleave",
+          function() {
+              dq("#menu-hidden").style.display = "none";
+          },
+        false);
+
+        addEventListener(dq("#menu-hidden"), "mouseleave",
+          function() {
             dq("#menu-hidden").style.display = "none";
           },
-          fn: false
-        });
-        addEventListener({
-          elem: dq("#menu-hidden"),
-          evtName: "mouseleave",
-          handler: function() {
-            dq("#menu-hidden").style.display = "none";
-          },
-          fn: false
-        });
-        addEventListener({
-          elem: dq("#menu-hidden"),
-          evtName: "click",
-          handler: function() {
+          false);
+
+        addEventListener(
+          dq("#menu-hidden"),
+          "click",
+          function() {
             addClass(dq(".content .left"), "left-hidden");
             addClass(dq(".content .left .menu-content"), "menu-content-hidden");
             dq(".content .left .menu-title").innerText = "";
             dq("#menu-hidden").style.display = "none";
-            //console.log(dq(".content .left").style.visibility, dq(".content .left").includeInLayout);
-            // dq(".content .left").style.width = 0;
-            // dq(".content .left").includeInLayout = false;
           },
-          fn: false
-        });
-        //, , index, fn
-        reomveRegistedEvent(dq("#menu-hidden"), "click", 0, false);
+          false
+        );
 
-        addEventListener({
-          elem: dq(".right-body"),
-          evtName: "mousemove",
-          handler: function(e) {
+        // reomveRegistedEvent(dq("#menu-hidden"), "click", 0, false);
+
+        addEventListener(
+          dq(".right-body"),
+          "mousemove",
+          function(e) {
             if(e.clientX <= 5) {
               dq("#menu-hidden").style.display = "block";
             }
           },
-          fn: false
-        })
+          false
+        )
         // alert(1)
         // test(3);
       });

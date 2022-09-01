@@ -48,11 +48,12 @@ window.removeClass = function(jsDom, className) {
 window.events = {}; // "元素: { "事件名": [] }"
 console.warn("==★此处应该判断所需的前置插件是否已经安装★==");
 
-window.addEventListener = function(jsDom, eventName, handler, fn) { //使用该方法为 元素添加监听 后续可以获取到元素
+const addEventListener = function(jsDom, eventName, handler, fn) { //使用该方法为 元素添加监听 后续可以获取到元素
+  // console.log(jsDom);
   //从window.events中获取该元素注册的事件
   if(window.events[jsDom]) {
     let handlers = window.events[jsDom][eventName];
-    if(handlders && handlers.constructor === Array) {
+    if(handlers && handlers.constructor === Array) {
       handlers.push(handler);
     } else {
       window.events[jsDom][eventName] = [];

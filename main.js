@@ -4,7 +4,7 @@ const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require("path");
 
 
-const { handleChooseDir } = require("./index/index") //
+const { handleChooseDir } = require("./index/index") //index.js中定义的函数，用来处理 渲染进程中向主进程 发送的消息 
 
 // 保持一个对于 window 对象的全局引用，不然，当 JavaScript 被 GC，
 // window 会被自动地关闭
