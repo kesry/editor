@@ -69,6 +69,14 @@
             }
           },
         false)
+
+        let tabs = dqa(".tab-card .close"); //选项卡标签
+        Array.from(tabs).forEach((item, i) => {
+          addEventListener(item, "click", function() {
+
+          }, false);
+        });
+
         // alert(1)
         // test(3);
       });
